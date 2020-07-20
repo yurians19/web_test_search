@@ -1,0 +1,45 @@
+<div>
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+        <mat-label>Search term</mat-label>
+        <input matInput [formControl]="searchFormControl" [errorStateMatcher]="matcher"
+                placeholder="search">
+        <mat-error *ngIf="searchFormControl.hasError('required')">
+            Search term is <strong>required</strong>
+        </mat-error>
+        </mat-form-field>
+    </form>
+</div>
+
+<div class="example-button-row">
+    <button mat-raised-button [disabled]="!searchFormControl.value" color="accent" (click)="GetSearch()" >Send</button>
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="entity">
+        <th mat-header-cell *matHeaderCellDef> Entity. </th>
+        <td mat-cell *matCellDef="let element"> {{element.entity}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="serviceOrigin">
+        <th mat-header-cell *matHeaderCellDef> Service </th>
+        <td mat-cell *matCellDef="let element"> {{element.serviceOrigin}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  
